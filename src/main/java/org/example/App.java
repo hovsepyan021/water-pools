@@ -5,11 +5,21 @@ import java.util.stream.LongStream;
 public class App 
 {
     public static long calculateWaterAmount(int[] landscape) {
+        checkArgument(landscape);
+        if(landscape.length < 3) {
+            return 0;
+        }
         long[] result = new long[landscape.length];
         for(int i = 0; i < landscape.length; i++) {
             result[i] = calculateWaterAmountForIndex(i, landscape);
         }
         return LongStream.of(result).sum();
+    }
+
+    public static void checkArgument(int[] landscape) {
+        if(landscape == null) {
+            throw new IllegalArgumentException("Argument null is not allowed.");
+        }
     }
 
     public static long calculateWaterAmountForIndex(int index, int[] landscape) {
