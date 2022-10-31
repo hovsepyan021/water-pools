@@ -20,6 +20,11 @@ public class App
         if(landscape == null) {
             throw new IllegalArgumentException("Argument null is not allowed.");
         }
+        for(int height : landscape) {
+            if(height > 32000 || height < 0) {
+                throw new IllegalArgumentException("Height should be in the following range: 0 <= height <= 32000");
+            }
+        }
     }
 
     public static long calculateWaterAmountForIndex(int index, int[] landscape) {

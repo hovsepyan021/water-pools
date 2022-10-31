@@ -14,7 +14,8 @@ public class AppTest extends TestCase {
             new WaterPoolTestCase(new int[]{3,1,3,1,3}, 4),
             new WaterPoolTestCase(new int[]{0,0,0,0,0}, 0),
             new WaterPoolTestCase(new int[]{5,5,5,5,5}, 0),
-            new WaterPoolTestCase(new int[]{4,5,5,5,4}, 0)
+            new WaterPoolTestCase(new int[]{4,5,5,5,4}, 0),
+            new WaterPoolTestCase(new int[]{32000,31999,32000,31999,32000}, 2)
     );
 
 
@@ -35,6 +36,20 @@ public class AppTest extends TestCase {
     public void testNullCase() {
         try {
             App.calculateWaterAmount(null);
+            fail("Illegal argument exception hasn't been thrown.");
+        } catch (IllegalArgumentException ignored) {}
+    }
+
+    public void testArrayWithMinusHeight() {
+        try {
+            App.calculateWaterAmount(new int[] {-1});
+            fail("Illegal argument exception hasn't been thrown.");
+        } catch (IllegalArgumentException ignored) {}
+    }
+
+    public void testArrayWithLargeHeight() {
+        try {
+            App.calculateWaterAmount(new int[] {32001});
             fail("Illegal argument exception hasn't been thrown.");
         } catch (IllegalArgumentException ignored) {}
     }
